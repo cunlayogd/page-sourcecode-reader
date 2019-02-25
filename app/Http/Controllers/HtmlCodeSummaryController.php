@@ -44,9 +44,9 @@ class HtmlCodeSummaryController extends Controller
         $tagsWithCountArr = array();
 
         foreach($tagsArr as $key => $tag) {
-            if($this->custom_array_search($tag->tagName, $tagsWithCountArr)) {
-                $key = $this->custom_array_search($tag->tagName, $tagsWithCountArr);
-                $tagsWithCountArr[$key]['count'] += 1;
+            $tagIndex = $this->custom_array_search($tag->tagName, $tagsWithCountArr);
+            if($tagIndex !== false) {
+                $tagsWithCountArr[$tagIndex]['count'] += 1;
             } else {
                 $tagsWithCountArr[$key]['tag'] = $tag->tagName;
                 $tagsWithCountArr[$key]['count'] = 1;
@@ -62,13 +62,12 @@ class HtmlCodeSummaryController extends Controller
     /*
      * Params - search (needle), multidimensional array (haystack)
      * Checks to see if search value is present as a key in the multidimensiona array
-     * return boolean
+     * return false or a key
      */
     public function custom_array_search($needle,$haystack) {
         foreach($haystack as $key=>$value) {
-           $current_key = $key;
            if($needle === $value OR (is_array($value) && $this->custom_array_search($needle,$value) !== false)) {
-                return $current_key;
+                return $key; // $key of the multidimensional array current index
             }
         }
         return false;
