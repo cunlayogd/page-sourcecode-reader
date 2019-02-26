@@ -13,7 +13,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.png') }}">
     
     <!-- Bootstrap CSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body style="background-color: #000;">
     <div id="app">
@@ -23,5 +23,5 @@
     </div>
 </body>
 <!-- App.js -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ secure_asset('js/app.js') }}"></script>
 </html>
